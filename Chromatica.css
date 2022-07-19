@@ -4,9 +4,9 @@
 /* ██║     ██╔══██║██╔══██╗██║   ██║██║╚██╔╝██║██╔══██║   ██║   ██║██║     ██╔══██║ */
 /* ╚██████╗██║  ██║██║  ██║╚██████╔╝██║ ╚═╝ ██║██║  ██║   ██║   ██║╚██████╗██║  ██║ */
 /*  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝╚═╝  ╚═╝ */
-                                                                                                                                                             
+                  
 /* -------------------------------------------------------------------------- */
-/*                           SECTION Style Settings                           */
+/*                                  Settings                                  */
 /* -------------------------------------------------------------------------- */
 
 /* @settings
@@ -38,31 +38,85 @@ settings:
         format: hsl-split
         default: '#007AFF'
     -
+        title: Base Hue
+        id: color-base-h
+        type: variable-number-slider
+        default: 20
+        min: 0
+        max: 330
+        step: 1 
+    -
+        title: Base Saturation
+        id: color-base-s
+        type: variable-number-slider
+        default: 50
+        format: '%'
+        min: 1
+        max: 100
+        step: 1 
+    -
+        title: Base Lightness
+        id: color-base-l
+        type: variable-number-slider
+        default: 30
+        format: '%'
+        min: 0
+        max: 100
+        step: 1 
+    -
+        title: Colored Folder Saturation
+        id: color-folder-s
+        type: variable-number-slider
+        default: 30
+        format: '%'
+        min: 0
+        max: 100
+        step: 1 
+    -
+        title: Colored Folder Lightness
+        id: color-folder-l
+        type: variable-number-slider
+        default: 50
+        format: '%'
+        min: 0
+        max: 100
+        step: 1 
+    -
+        title: Colored Folder Alpha
+        id: color-folder-a
+        type: variable-number-slider
+        default: 0.5
+        min: 0
+        max: 1
+        step: 0.01 
+    -
         id: heading-more
         title: More Customization
         type: heading
         level: 1
         collapsed: true
     -
+        title: Note area max width
+        id: note-max-width
+        type: variable-number-slider
+        default: 65
+        format: '%'
+        min: 20
+        max: 100
+        step: 1
 */
 
-/* ------------------------ !SECTION (End of settings) ----------------------- */
-
 /* -------------------------------------------------------------------------- */
-/*                           SECTION CSS Properties                           */
+/*                                 Properties                                 */
 /* -------------------------------------------------------------------------- */
 
-/* ------------------------- SECTION Misc Properties ------------------------ */
+/* --------------------------- Wdsriting Area Width --------------------------- */
 
 :root {
-    --note-max-width: 900px;
+    --note-max-width: 65%;
 }
 
-/* -------------------- !SECTION (End of Misc Properties) ------------------- */
-
-/* ------------------------------ SECTION Fonts ----------------------------- */
-
-/* Specify default fonts */
+/* ---------------------------------- Fonts --------------------------------- */
 
 :root {
 
@@ -75,31 +129,26 @@ settings:
     --heading-font: var(--font-heading); /* Old header font */
 }   
 
-/* ------------------------- !SECTION (End of Fonts) ------------------------ */
+/* --------------------------------- Colors --------------------------------- */
 
-
-/* --------------------------- SECTION Base Colors -------------------------- */
-
-
+/* Base Colors */
 :root {
-    --color-base-h: 20;
-    --color-base-s: 100%;
+    --color-base-h: 200;
+    --color-base-s: 30%;
     --color-base-l: 30%;
     --color-accent-manual-h: 211;
     --color-accent-manual-s: 100%;
     --color-accent-manual-l: 50%;
 }
 
-
-/* ---------------------- !SECTION (End of Base Colors) --------------------- */
-
+/* Manual accent toggle */
 .manual-accent {
     --color-accent-h: var(--color-accent-manual-h) !important;
     --color-accent-s: var(--color-accent-manual-s) !important;
     --color-accent-l: var(--color-accent-manual-l) !important;
 }
 
-/* ---------------------- SECTION Dark Theme Variables ---------------------- */
+/* Dark theme colors */
 .theme-dark {
     --color-base-l-mod: calc(0.5 * var(--color-base-l));
     --color-accent-h: var(--color-base-h);
@@ -107,6 +156,7 @@ settings:
     --color-accent-l: calc(70% + (0.17 * var(--color-base-l)));
     
     --text-normal: #dcddde; /*Text body of note*/
+    --text-normal-transparent: hsla(210, 3%, 100%,0.50);
     --text-muted: hsl(var(--color-accent-h),var(--color-accent-s),var(--color-accent-l)); /*Text darker for sidebar, toggles, inactive, tags, etc*/
     --text-accent: hsl(var(--color-accent-h),var(--color-accent-s),var(--color-accent-l)); /*Links*/
     --text-accent-hover: #8875ff; /*Links hover*/
@@ -133,12 +183,25 @@ settings:
     --background-secondary-alt: hsl(var(--color-base-h),var(--color-base-s),calc(var(--color-base-l-mod)* 0.5));; /*Sidebar Title background*/
 }
 
+/* Dark theme folder colors */
+.theme-dark {
+    --color-folder-s: 30%;
+    --color-folder-l: 50%;
+    --color-folder-a: 0.5;
 
+    --color-folder0: 0, var(--color-folder-s), var(--color-folder-l);
+    --color-folder3: 36, var(--color-folder-s), var(--color-folder-l);
+    --color-folder1: 72, var(--color-folder-s), var(--color-folder-l);
+    --color-folder2: 108, var(--color-folder-s), var(--color-folder-l);
+    --color-folder4: 180, var(--color-folder-s), var(--color-folder-l);
+    --color-folder5: 216, var(--color-folder-s), var(--color-folder-l);
+    --color-folder6: 252, var(--color-folder-s), var(--color-folder-l);
+    --color-folder7: 288, var(--color-folder-s), var(--color-folder-l);
+    --color-folder8: 324, var(--color-folder-s), var(--color-folder-l);
+    --color-folder9: 360, var(--color-folder-s), var(--color-folder-l);
+}
 
-/* ----------------- !SECTION (End of Dark Theme Variables) ----------------- */
-
-/* ---------------------- SECTION Light Theme Variables --------------------- */
-
+/* Light theme colors */
 .theme-light {
     --color-base-l-max: calc(0.5 * var(--color-base-l)+ 0.5);
 
@@ -169,16 +232,9 @@ settings:
     --scrollbar-active-thumb-bg: rgba(0, 0, 0, 0.2); /*Scrollbar Dragged Color*/
 }
 
-/* ----------------- !SECTION (End of Light Theme Variables) ---------------- */
-
 /* -------------------------------------------------------------------------- */
-/*                      !SECTION (End of CSS Properties)                      */
+/*                                  Selectors                                 */
 /* -------------------------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------- */
-/*                                 SECTION UI                                 */
-/* -------------------------------------------------------------------------- */
-
 
 /*Box Sizing Reset - this makes it easier to set any ::before and ::after pseudo-elements' dimensions,
 since it includes any border and padding into the height and width values you set.
@@ -189,7 +245,7 @@ since it includes any border and padding into the height and width values you se
   box-sizing: border-box;
 }*/
 
-/* ------------------- SECTION Startup Progress Bar Screen ------------------ */
+/* -------------------------- Startup progress bar -------------------------- */
 
 /*Startup Progress Bar Window*/
 .progress-bar {}
@@ -203,10 +259,7 @@ since it includes any border and padding into the height and width values you se
 /*Startup Progress Bar Moving Line*/
 .progress-bar-indicator .progress-bar-subline {}
 
-
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* --------------------------- SECTION Settings UI -------------------------- */
+/* ------------------------------- Settings UI ------------------------------ */
 
 /*All Popup Windows: Settings*/
 .modal {}
@@ -229,10 +282,7 @@ since it includes any border and padding into the height and width values you se
 /*Community Plugins Browser*/
 .community-plugin {}
 
-
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ----------------------------- SECTION Extras ----------------------------- */
+/* --------------------------------- Extras --------------------------------- */
 
 /*Tooltip Popup*/
 .tooltip {}
@@ -241,9 +291,7 @@ since it includes any border and padding into the height and width values you se
 .dropdown {}
 
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ---------------------------- SECTION Workspace --------------------------- */
+/* ------------------------------ Workspace UI ------------------------------ */
 
 /* ribbons, the thin vertical bars to the far left/right */
 .workspace-ribbon {
@@ -261,9 +309,7 @@ since it includes any border and padding into the height and width values you se
 /*Side Panel: Icons*/
 .workspace-tab-header-inner-icon {}
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* -------------------------- SECTION File Explorer ------------------------- */
+/* ------------------------------ File Explorer ----------------------------- */
 
 /*Nav Top: Create Note, Sort, Create Folder*/
 .nav-header {}
@@ -282,10 +328,10 @@ since it includes any border and padding into the height and width values you se
     background-color: var(--background-secondary-alt);
 }
 
+/* -------------------------- File Explorer Folders ------------------------- */
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
 
-/* ---------------------------- SECTION Title Bar --------------------------- */
+/* -------------------------------- Title Bar ------------------------------- */
 
 /*Title Bar*/
 .titlebar {}
@@ -305,10 +351,7 @@ since it includes any border and padding into the height and width values you se
 /*Window Control- Close*/
 .mod-close {}
 
-
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ----------------------------- SECTION Buttons ---------------------------- */
+/* --------------------------------- Buttons -------------------------------- */
 
 /*Default Buttons*/
 button {}
@@ -317,9 +360,7 @@ button.mod-cta {}
 /*Warning Buttons*/
 button.mod-warning{}
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ------------------------- SECTION Note Title Bars ------------------------ */
+/* ----------------------------- Note Title Bars ---------------------------- */
 
 /*Note Title Bar*/
 .workspace-leaf .view-header {}
@@ -344,18 +385,7 @@ button.mod-warning{}
 /*Note Title Bar: Settings Icons*/
 .workspace-leaf.mod-active .view-action {}
 
-
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* -------------------------------------------------------------------------- */
-/*                            !SECTION (End of UI)                            */
-/* -------------------------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------- */
-/*                             SECTION Notetaking                             */
-/* -------------------------------------------------------------------------- */
-
-/* -------------------------- SECTION Writing Area -------------------------- */
+/* ------------------------------ Writing area ------------------------------ */
 
 /* Writing area width */
 .CodeMirror-lines,
@@ -374,9 +404,7 @@ button.mod-warning{}
 
 .markdown-preview-view {} /*Reading Mode*/
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ---------------------------- SECTION Emphasis ---------------------------- */
+/* -------------------------------- Emphasis -------------------------------- */
 
 /*Bold*/
 
@@ -397,10 +425,7 @@ em {} /*Reading View*/
 .cm-strikethrough {} /*Editing View*/
 del {} /*Reading View*/
 
-
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ---------------------------- SECTION Headings ---------------------------- */
+/* -------------------------------- Headings -------------------------------- */
 
 h1 {} /*Reading Mode*/
 h2 {} /*Reading Mode*/
@@ -417,9 +442,7 @@ h6 {} /*Reading Mode*/
 
 .cm-header {} /* applies to all source mode headings */
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ------------------------- SECTION Horizontal Line ------------------------ */
+/* ----------------------------- Horizontal rule ---------------------------- */
 
 hr {} /*Reading Mode*/
 .hr.cm-line {} /*Source Mode*/
@@ -428,16 +451,12 @@ hr {} /*Reading Mode*/
 /*HR Line Text*/
 .cm-s-obsidian pre.HyperMD-hr {} /*Source Mode*/
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ---------------------------- SECTION Comments ---------------------------- */
+/* -------------------------------- Comments -------------------------------- */
 
 /* html comments and obsidian style comments */
 .cm-comment {}
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ------------------------------ SECTION Code ------------------------------ */
+/* ---------------------------------- Code ---------------------------------- */
 
 code {}
 
@@ -453,10 +472,7 @@ code {}
 .markdown-preview-view pre[class*=language-] {} /*Reading Mode*/
 .markdown-preview-view code[class*=language-] {} /*Reading Mode*/
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ------------------------------ SECTION Links ----------------------------- */
-
+/* ---------------------------------- Links --------------------------------- */
 
 .cm-s-obsidian span.cm-hmd-internal-link {} /*Source Mode*/
 
@@ -501,10 +517,7 @@ a.internal-link.is-unresolved {} /*Reading Mode*/
     text-decoration-style: dashed;
 }
 
-
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ---------------------- SECTION Lists and blockquote ---------------------- */
+/* -------------------------- Lists and blockquote -------------------------- */
 
 .cm-s-obsidian .HyperMD-list-line {} /*Source Mode*/
 
@@ -560,9 +573,7 @@ input[type=checkbox]:checked {} /*Reading Mode*/
 /*Blockquotes*/
 .markdown-preview-view blockquote {}
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ----------------------------- SECTION Tables ----------------------------- */
+/* --------------------------------- Tables --------------------------------- */
 
 table {} /*Reading Mode*/
 
@@ -576,16 +587,12 @@ table td {} /*Reading Mode*/
 table tr {} /*Reading Mode*/
 .cm-s-obsidian .HyperMD-table-row {} /*Source Mode*/
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ------------------------------ SECTION Tags ------------------------------ */
+/* ---------------------------------- Tags ---------------------------------- */
 
 a.tag {} /*Reading Mode*/
 .cm-s-obsidian span.cm-hashtag {} /*Source Mode*/
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ---------------------------- SECTION Metadata ---------------------------- */
+/* -------------------------------- Metadata -------------------------------- */
 
 .frontmatter-container {} /*Reading Mode*/
 .CodeMirror-line .cm-s-obsidian .cm-hmd-frontmatter {
@@ -597,9 +604,7 @@ a.tag {} /*Reading Mode*/
 /*Frontmatter Tag*/
 .frontmatter-container .frontmatter-alias {} /*Reading Mode*/
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ----------------------------- SECTION Embeds ----------------------------- */
+/* --------------------------------- Embeds --------------------------------- */
 
 .markdown-preview-view .markdown-embed {} /*Reading Mode*/
 .internal-embed.is-loaded:not(.image-embed) {} /*Reading Mode*/
@@ -623,9 +628,7 @@ a.tag {} /*Reading Mode*/
 .markdown-embed-link {}
 .file-embed-link {}
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* ---------------------------- SECTION Footnotes --------------------------- */
+/* -------------------------------- Footnotes ------------------------------- */
 
 /*Footnote link in note*/
 .markdown-preview-view a.footnote-link {} /*Reading View*/
@@ -639,15 +642,7 @@ a.tag {} /*Reading Mode*/
 /*Footnote back ref (arrow) at the bottom of the note*/
 .footnote-backref {} /*Reading View*/
 
-/* ------------------------ !SECTION (End of section) ----------------------- */
-
-/* -------------------------------------------------------------------------- */
-/*                        !SECTION (End of Notetaking)                        */
-/* -------------------------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------- */
-/*                                SECTION Graph                               */
-/* -------------------------------------------------------------------------- */
+/* -------------------------------- Graph UI -------------------------------- */
 
 .graph-view.color-fill {
 	color: var(--text-muted); /*color of nodes*/
@@ -716,8 +711,175 @@ a.tag {} /*Reading Mode*/
 }
 
 /* -------------------------------------------------------------------------- */
-/*                           !SECTION (End of Graph)                          */
+/*                               Feature Addons                               */
 /* -------------------------------------------------------------------------- */
+
+/* --------------------------- Additional Callouts -------------------------- */
+
+/* .callout[data-callout="rule"] {
+} */
+
+/* ----------------------------- Colored Folders ---------------------------- */
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="0."] {
+    background-color: hsl(var(--color-folder0), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="0."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder0), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="0."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="0."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="0."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="0."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="0."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="1."] {
+    background-color: hsl(var(--color-folder1), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="1."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder1), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="1."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="1."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="1."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="1."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="1."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="2."] {
+    background-color: hsl(var(--color-folder2), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="2."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder2), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="2."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="2."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="2."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="2."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="2."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="3."] {
+    background-color: hsl(var(--color-folder3), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="3."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder3), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="3."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="3."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="3"]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="3."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="3."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="4."] {
+    background-color: hsl(var(--color-folder4), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="4."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder4), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="4."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="4."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="4."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="4."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="4."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="5."] {
+    background-color: hsl(var(--color-folder5), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="5."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder5), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="5."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="5."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="5."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="5."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="5."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="6."] {
+    background-color: hsl(var(--color-folder6), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="6."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder6), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="6."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="6."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="6."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="6."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="6."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="7."] {
+    background-color: hsl(var(--color-folder7), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="7."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder7), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="7."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="7."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="7."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="7."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="7."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="8."] {
+    background-color: hsl(var(--color-folder8), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="8."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder8), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="8."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="8."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="8."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="8."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="8."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="9."] {
+    background-color: hsl(var(--color-folder9), var(--color-folder-a));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="9."]+.nav-folder-children {
+    background-color: hsla(var(--color-folder9), calc(var(--color-folder-a) - 0.2));
+}
+
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="9."],
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="9."]+.nav-folder-children .nav-folder-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="9."]+.nav-folder-children .nav-file-title,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="9."] .nav-folder-collapse-indicator.collapse-icon .right-triangle,
+.nav-folder.mod-root>.nav-folder-children>.nav-folder>.nav-folder-title[data-path^="9."]+.nav-folder-children .nav-folder-collapse-indicator.collapse-icon .right-triangle {
+    color: var(--text-normal-transparent);
+}
 
 /* -------------------------------------------------------------------------- */
 /*                            SECTION Embedded Data                           */
