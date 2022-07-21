@@ -152,15 +152,19 @@ settings:
 .theme-dark {
     --color-base-l-mod: calc(0.5 * var(--color-base-l));
     --color-accent-h: var(--color-base-h);
-    --color-accent-s: calc(var(--color-base-s) + 0.3 * var(--color-base-l));
+    --color-accent-s: calc(30% + 0.7 * var(--color-base-s));
     --color-accent-l: calc(70% + (0.17 * var(--color-base-l)));
-    
+    --color-text-code: hsl(var(--color-accent-h),var(--color-accent-s),calc(var(--color-accent-l) * 0.5));
+    --color-hashtag-background: hsl(var(--color-accent-h),var(--color-accent-s),calc(var(--color-accent-l) * 0.3));
+
     --text-normal: #dcddde; /*Text body of note*/
     --text-normal-transparent: hsla(210, 3%, 100%,0.50);
     --text-muted: hsl(var(--color-accent-h),var(--color-accent-s),var(--color-accent-l)); /*Text darker for sidebar, toggles, inactive, tags, etc*/
     --text-accent: hsl(var(--color-accent-h),var(--color-accent-s),var(--color-accent-l)); /*Links*/
     --text-accent-hover: #8875ff; /*Links hover*/
     --text-faint: hsl(var(--color-accent-h),calc(var(--color-accent-s) * 0.7),calc(var(--color-accent-l)*0.5));; /*Link brackets color & Gutter Numbers*/
+    
+
 
     --text-highlight-bg: rgba(255, 255, 0, 0.438); /*Search Matches*/
     --text-highlight-bg-active: rgba(255, 128, 0, 0.4); /*Active Search Match (Preview Mode)*/
@@ -461,7 +465,9 @@ hr {} /*Reading Mode*/
 code {}
 
 /*Inline Code*/
-.cm-s-obsidian span.cm-inline-code {} /*Source Mode*/
+.cm-s-obsidian span.cm-inline-code {
+    color: var(--color-text-code);
+} /*Source Mode*/
 .markdown-preview-view code {} /*Reading Mode*/
 
 /*Codeblock (no language specified) */
@@ -484,38 +490,6 @@ a.external-link {} /*Reading Mode*/
 
 /*Link to No Page*/
 a.internal-link.is-unresolved {} /*Reading Mode*/
-
-/* Unresolved Wiki Links */
-
-/*Allow seperate unresolved item styles*/
-
-.markdown-source-view.mod-cm6 .is-unresolved {
-    opacity: 1 !important;
-}
-
-
-/* unresolved links */
-
-.is-unresolved span.cm-hmd-internal-link,
-.markdown-rendered .internal-link.is-unresolved {
-    opacity: 0.75;
-}
-
-
-/* unresolved link as header */
-
-.is-unresolved span.cm-hmd-internal-link.cm-header,
-:is(h1, h2, h3, h4, h5, h6)>.internal-link.is-unresolved {
-    opacity: 0.75 !important;
-}
-
-
-/* unresolved link as header text style */
-
-.is-unresolved span.cm-hmd-internal-link.cm-header .cm-underline,
-:is(h1, h2, h3, h4, h5, h6)>.internal-link.is-unresolved {
-    text-decoration-style: dashed;
-}
 
 /* -------------------------- Lists and blockquote -------------------------- */
 
@@ -591,6 +565,27 @@ table tr {} /*Reading Mode*/
 
 a.tag {} /*Reading Mode*/
 .cm-s-obsidian span.cm-hashtag {} /*Source Mode*/
+
+a.tag,
+.cm-s-obsidian span.cm-hashtag {
+    text-decoration: none;
+    color: var(--text-accent);
+    background-color: var(--color-hashtag-background);
+    border-radius: 7px;
+    padding-left: 0.2em;
+    padding-right: 0.2em;
+}
+
+
+/* Fix seperate tag symbol from text */
+
+.cm-hashtag-begin {
+    display: none;
+}
+
+.cm-s-obsidian span.cm-hashtag::before {
+    content: '#';
+}
 
 /* -------------------------------- Metadata -------------------------------- */
 
